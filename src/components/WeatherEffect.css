@@ -1,0 +1,260 @@
+.weather-effect-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.effect-rain,
+.effect-storm,
+.effect-snow,
+.effect-clouds,
+.effect-fog,
+.effect-sunny {
+  position: absolute;
+  inset: 0;
+}
+
+/* ===== RAIN ===== */
+
+.raindrop {
+  position: absolute;
+  top: -40px;
+  width: 2px;
+  border-radius: 999px;
+  background: rgba(190, 225, 255, 0.8);
+  box-shadow: 0 0 6px rgba(190, 225, 255, 0.35);
+  animation-name: rainFall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.storm-drop {
+  background: rgba(200, 235, 255, 0.95);
+}
+
+@keyframes rainFall {
+  from {
+    transform: translateY(0) translateX(0) rotate(12deg);
+  }
+
+  to {
+    transform: translateY(115vh) translateX(-35px) rotate(12deg);
+  }
+}
+
+/* ===== STORM FLASH ===== */
+
+.storm-flash {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.18);
+  opacity: 0;
+  animation: stormFlash 6s infinite;
+}
+
+@keyframes stormFlash {
+  0%,
+  92%,
+  100% {
+    opacity: 0;
+  }
+
+  93% {
+    opacity: 0.18;
+  }
+
+  94% {
+    opacity: 0.04;
+  }
+
+  95% {
+    opacity: 0.22;
+  }
+
+  96% {
+    opacity: 0;
+  }
+}
+
+/* ===== SNOW ===== */
+
+.snowflake {
+  position: absolute;
+  top: -30px;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.55);
+  animation-name: snowFall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes snowFall {
+  from {
+    transform: translateY(0) translateX(0);
+  }
+
+  to {
+    transform: translateY(110vh) translateX(var(--drift));
+  }
+}
+
+/* ===== CLOUDS ===== */
+
+.effect-clouds {
+  display: block;
+}
+
+.cloud {
+  position: absolute;
+  left: -320px;
+  width: 220px;
+  height: 120px;
+  opacity: 0.9;
+  animation-name: cloudMove;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  filter: drop-shadow(0 8px 16px rgba(70, 80, 90, 0.14));
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 120'><path d='M49 96h118c22 0 40-16 40-36s-18-36-40-36c-5 0-10 1-14 2C145 10 128 0 108 0 82 0 61 17 55 40c-2 0-4 0-6 0C22 40 0 53 0 68s22 28 49 28z' fill='%23eef2f5' stroke='%23cfd6dd' stroke-width='2'/></svg>");
+}
+
+.cloud::before,
+.cloud::after,
+.cloud-middle {
+  display: none;
+}
+
+@keyframes cloudMove {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(100vw + 460px));
+  }
+}
+
+/* ===== FOG ===== */
+
+.effect-fog {
+  position: absolute;
+  inset: 0;
+  background: rgba(220, 228, 235, 0.18);
+}
+
+.fog-band {
+  position: absolute;
+  left: -40%;
+  width: 180%;
+  height: 140px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0),
+    rgba(235, 240, 245, 0.42),
+    rgba(255, 255, 255, 0)
+  );
+  filter: blur(24px);
+  animation-name: fogMove;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes fogMove {
+  0% {
+    transform: translateX(0);
+    opacity: 0.42;
+  }
+
+  50% {
+    transform: translateX(12%);
+    opacity: 0.62;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 0.42;
+  }
+}
+
+/* ===== SUNNY ===== */
+
+.sun-glow {
+  position: absolute;
+  top: 36px;
+  right: 54px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 223, 120, 0.95) 0%,
+    rgba(255, 223, 120, 0.45) 38%,
+    rgba(255, 223, 120, 0.12) 56%,
+    rgba(255, 223, 120, 0) 76%
+  );
+  animation: sunPulse 4s ease-in-out infinite;
+}
+
+.sun-rays {
+  position: absolute;
+  top: -8px;
+  right: -6px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 235, 160, 0) 44%,
+    rgba(255, 235, 160, 0.16) 60%,
+    rgba(255, 235, 160, 0) 74%
+  );
+  animation: raysRotate 18s linear infinite;
+}
+
+@keyframes sunPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.88;
+  }
+
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes raysRotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .sun-glow {
+    width: 120px;
+    height: 120px;
+    top: 28px;
+    right: 30px;
+  }
+
+  .sun-rays {
+    width: 220px;
+    height: 220px;
+    top: -8px;
+    right: -8px;
+  }
+
+  .cloud {
+    width: 160px;
+    height: 88px;
+  }
+}

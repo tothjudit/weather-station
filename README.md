@@ -1,5 +1,8 @@
 # Weather Station
 
+**Live demo:**
+https://idojaras-allomas.netlify.app/
+
 ## Setup
 
 1. Clone the repository:

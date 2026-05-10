@@ -1,25 +1,23 @@
-function SearchBar({ city, setCity, handleSearch }) {
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      handleSearch();
-    }
+function SearchBar({ city, setCity, handleSearch, isLoading }) {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    handleSearch();
   };
 
   return (
-    <div className="search-bar">
+    <form className="search-bar" onSubmit={handleSubmit}>
       <input
         type="text"
-        className="search-input"
         value={city}
-        onChange={(e) => setCity(e.target.value)}
-        onKeyDown={handleKeyDown}
-        placeholder="Enter city name..."
+        onChange={(event) => setCity(event.target.value)}
+        placeholder="Enter a city name"
+        aria-label="Enter a city name"
       />
 
-      <button className="search-button" onClick={handleSearch}>
-        Search
+      <button className="primary-button" type="submit" disabled={isLoading}>
+        {isLoading ? "Loading..." : "Search"}
       </button>
-    </div>
+    </form>
   );
 }
 

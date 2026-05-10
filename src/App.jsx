@@ -103,6 +103,15 @@ function App() {
     return new Date(utcTime + timezoneOffsetSeconds * 1000);
   };
 
+  const getLocalDateString = (timezoneOffsetSeconds = 0) => {
+    const localDate = getLocalDateByTimezone(timezoneOffsetSeconds);
+    const year = localDate.getFullYear();
+    const month = String(localDate.getMonth() + 1).padStart(2, "0");
+    const day = String(localDate.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  };
+
   const getLocalTimeString = (timezoneOffsetSeconds = 0) => {
     const localDate = getLocalDateByTimezone(timezoneOffsetSeconds);
 
@@ -152,7 +161,10 @@ function App() {
     return formatDateKey(localDate);
   };
 
-  const getTomorrowAndNextDaysForecast = (forecastList, timezoneOffsetSeconds = 0) => {
+  const getTomorrowAndNextDaysForecast = (
+    forecastList,
+    timezoneOffsetSeconds = 0
+  ) => {
     if (!forecastList || forecastList.length === 0) return [];
 
     const todayKey = getTodayKeyForCity(timezoneOffsetSeconds);
@@ -320,6 +332,9 @@ function App() {
                   {getCountryName(weatherData.sys.country)}
                 </p>
                 <p className="meta-text">
+                  Local date: {getLocalDateString(weatherData.timezone)}
+                </p>
+                <p className="meta-text">
                   Local time: {getLocalTimeString(weatherData.timezone)}
                 </p>
                 <p className="meta-text">
@@ -356,7 +371,7 @@ function App() {
                     isToday(item) ? "forecast-card-today" : ""
                   }`}
                 >
-                  {isToday(item) && <div className="today-badge">Today</div>}
+                  {isToday(item) && <div className="today-badge">TODAY</div>}
 
                   <p className="forecast-date">{item.dt_txt.split(" ")[0]}</p>
                   <p className="forecast-day">{getDayName(item.dt_txt)}</p>

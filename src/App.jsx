@@ -321,40 +321,44 @@ function App() {
 
         {weatherData && !isLoading && (
           <div className="current-weather">
-            <div className="current-weather-top">
-              <div className="current-weather-icon">
-                {getWeatherIcon(weatherData.weather[0].main)}
+            <div className="current-weather-layout">
+              <div className="current-weather-left">
+                <div className="current-weather-icon">
+                  {getWeatherIcon(weatherData.weather[0].main)}
+                </div>
+
+                <div>
+                  <p className="location-line">
+                    Location: {weatherData.name},{" "}
+                    {getCountryName(weatherData.sys.country)}
+                  </p>
+                  <p className="meta-text">
+                    Local date: {getLocalDateString(weatherData.timezone)}
+                  </p>
+                  <p className="meta-text">
+                    Local time: {getLocalTimeString(weatherData.timezone)}
+                  </p>
+                  <p className="meta-text">
+                    Time of day: {getTimeOfDayLabel(weatherData.timezone)}
+                  </p>
+                  <p className="meta-text">
+                    Last updated:{" "}
+                    {getLastUpdatedString(lastUpdated, weatherData.timezone)}
+                  </p>
+                </div>
               </div>
 
-              <div>
-                <p className="location-line">
-                  Location: {weatherData.name},{" "}
-                  {getCountryName(weatherData.sys.country)}
-                </p>
-                <p className="meta-text">
-                  Local date: {getLocalDateString(weatherData.timezone)}
-                </p>
-                <p className="meta-text">
-                  Local time: {getLocalTimeString(weatherData.timezone)}
-                </p>
-                <p className="meta-text">
-                  Time of day: {getTimeOfDayLabel(weatherData.timezone)}
-                </p>
-                <p className="meta-text">
-                  Last updated:{" "}
-                  {getLastUpdatedString(lastUpdated, weatherData.timezone)}
-                </p>
+              <div className="current-weather-right">
+                <p>Weather: {weatherData.weather[0].main}</p>
+                <p>Description: {weatherData.weather[0].description}</p>
+                <p>Temperature: {Math.round(weatherData.main.temp)} °C</p>
+
+                <div className="save-button-wrap">
+                  <button className="primary-button" onClick={handleSaveCity}>
+                    Save city
+                  </button>
+                </div>
               </div>
-            </div>
-
-            <p>Weather: {weatherData.weather[0].main}</p>
-            <p>Description: {weatherData.weather[0].description}</p>
-            <p>Temperature: {Math.round(weatherData.main.temp)} °C</p>
-
-            <div className="save-button-wrap">
-              <button className="primary-button" onClick={handleSaveCity}>
-                Save city
-              </button>
             </div>
           </div>
         )}

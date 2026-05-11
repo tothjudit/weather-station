@@ -164,7 +164,7 @@ h1 {
 .current-weather {
   max-width: 1100px;
   margin: 24px auto;
-  padding: 24px;
+  padding: 24px 28px;
   border-radius: 24px;
   background: rgba(30, 44, 61, 0.72);
   border: 1px solid rgba(255, 255, 255, 0.14);
@@ -172,32 +172,49 @@ h1 {
   box-shadow: 0 18px 36px rgba(0, 0, 0, 0.2);
 }
 
-.current-weather p {
-  margin: 12px 0;
-  font-size: 1rem;
+.current-weather-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 28px;
+  align-items: start;
 }
 
-.current-weather-top {
+.current-weather-left,
+.current-weather-right {
+  min-width: 0;
+}
+
+.current-weather-left {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 12px;
+  gap: 18px;
+  align-items: flex-start;
 }
 
 .current-weather-icon {
-  font-size: 3rem;
+  font-size: 4.4rem;
   line-height: 1;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.current-weather p {
+  margin: 0 0 14px;
+  font-size: 1rem;
 }
 
 .location-line {
   font-weight: 700;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 
 .meta-text {
-  margin: 2px 0;
+  margin: 0 0 10px;
   opacity: 0.9;
   font-size: 0.95rem;
+}
+
+.current-weather-right .save-button-wrap {
+  margin-top: 20px;
 }
 
 /* ===== SECTIONS ===== */
@@ -424,15 +441,22 @@ h1 {
   }
 
   .current-weather {
-    padding: 18px;
+    width: 100%;
+    padding: 18px 20px;
   }
 
-  .current-weather-top {
-    gap: 12px;
+  .current-weather-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .current-weather-left {
+    gap: 14px;
   }
 
   .current-weather-icon {
-    font-size: 2.4rem;
+    font-size: 3.2rem;
+    margin-top: 2px;
   }
 
   .section h2 {
